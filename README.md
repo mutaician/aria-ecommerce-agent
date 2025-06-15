@@ -51,9 +51,16 @@ Mastra.ai projects typically run a development server that provides a playground
 
 2.  **Interact with Aria:**
     Once the playground is open, you can interact with the "Aria" agent. Try some of the example queries:
-    *   "Check the stock level for TechPro Wireless Headphones"
+    *   "Check the stock level for Wireless Headphones"
     *   "Generate a sales report for the last 30 days"
     *   "Add a new product: 'Smart Watch Pro' priced at $299.99 in Electronics category"
+    *   "What are my top-selling products this month?"
+    *   "Which products are running low on stock?"
+    *   "Hide the product with the name T-shirt from the store for now."
+    *   "Generate a news blog post with the topic of eco-friendly products."
+    *   "Create a social media post for Instagram announcing a 20% off flash sale on all headphones."
+    *   "What was our total revenue last quarter?"
+    *   "Can you give me some SEO keywords for 'classic jeans'?"
 
 
 
