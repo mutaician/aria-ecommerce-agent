@@ -41,7 +41,7 @@ export const ariaToolsRecord = {
   updateInventory,
   
   // Product Management
-  // getAllProducts,
+  getAllProducts,
   getProduct,
   addNewProduct,
   updateProduct,

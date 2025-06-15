@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { Agent } from '@mastra/core';
 import { ariaToolsRecord } from '../tools';
 import { Memory } from '@mastra/memory';
@@ -49,7 +49,7 @@ export const ariaAgent = new Agent({
 - Provide personalized recommendations based on history
 
 Always be proactive in suggesting improvements and identifying opportunities for optimization. Help users make informed decisions about their e-commerce operations.`,
-  model: openai('gpt-4o-mini'),
+  model: google('models/gemini-2.0-flash'),
   tools: ariaToolsRecord,
   memory: new Memory({
     storage: new LibSQLStore({

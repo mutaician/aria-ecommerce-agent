@@ -1,9 +1,9 @@
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { Agent } from '@mastra/core/agent';
 import { createStep, createWorkflow } from '@mastra/core/workflows';
 import { z } from 'zod';
 
-const llm = openai('gpt-4.1-mini');
+const llm = google('models/gemini-2.0-flash-lite');
 
 const agent = new Agent({
   name: 'Weather Agent',

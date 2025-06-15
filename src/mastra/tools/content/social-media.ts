@@ -2,7 +2,7 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import { getDataStore } from '../../../data/store';
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
 
 export const generateSocialMediaContent = createTool({
@@ -100,7 +100,7 @@ export const generateSocialMediaContent = createTool({
       prompt += `Requirements:\n- Include emojis: ${context.includeEmojis}\n- Include hashtags: ${context.includeHashtags}\n- Platform-optimized for ${context.platform}\n- Engaging and on-brand\n- Encourage interaction\n${context.callToAction ? `- Include this CTA: ${context.callToAction}` : '- Include a compelling call-to-action'}\n\nCreate content that matches ${context.platform}'s style and best practices.`;
 
       const result = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt,
         temperature: 0.8, // Higher creativity for social media
       });
@@ -108,7 +108,7 @@ export const generateSocialMediaContent = createTool({
       // Generate hashtags specifically
       const hashtagPrompt = `Generate ${platformSpec.hashtagCount} relevant hashtags for ${context.platform} content about ${context.contentType}${product ? ` featuring ${product.name}` : ''}. \n\nInclude:\n- Industry-specific hashtags\n- Product/category hashtags\n- Brand/community hashtags\n- Trending/popular hashtags\n\nReturn as comma-separated values without the # symbol.`;
       const hashtagResult = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt: hashtagPrompt,
         temperature: 0.6,
       });
@@ -117,7 +117,7 @@ export const generateSocialMediaContent = createTool({
       const suggestionsPrompt = `Generate creative content suggestions for ${context.platform} ${context.contentType} post${product ? ` featuring ${product.name}` : ''}.\n\nProvide:\n- 3-4 image/photo ideas\n${context.platform === 'tiktok' || context.platform === 'instagram' ? '- 2-3 video content ideas' : ''}\n- 2-3 posting tips specific to ${context.platform}\n\nBe specific and actionable.`;
 
       const suggestionsResult = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt: suggestionsPrompt,
         temperature: 0.7,
       });

@@ -2,7 +2,7 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import { getDataStore } from '../../../data/store';
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
 
 export const generateBlogPost = createTool({
@@ -58,7 +58,7 @@ export const generateBlogPost = createTool({
       const prompt = `Write a ${context.tone} blog post about "${context.topic}".\n\nBlog Post Type: ${context.postType}\n${typePrompts[context.postType]}\n\nRequirements:\n- Target word count: ${context.targetWordCount} words\n- Tone: ${context.tone}\n- Include SEO optimization: ${context.includeSEO}\n${productContext}\n\nStructure the blog post with:\n1. Compelling headline\n2. Engaging introduction\n3. Well-organized body content with subheadings\n4. Strong conclusion with call-to-action\n5. Meta description (150-160 characters)\n6. Suggested tags for categorization\n7. SEO keywords if requested\n\nMake the content engaging, informative, and valuable to readers while maintaining brand consistency.`;
 
       const result = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt,
         temperature: 0.7,
       });
@@ -72,21 +72,21 @@ export const generateBlogPost = createTool({
       
       // Generate meta description
       const metaDescResult = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt: `Create a compelling meta description (150-160 characters) for this blog post titled "${title}" about ${context.topic}. Make it engaging and SEO-friendly.`,
         temperature: 0.5,
       });
 
       // Generate tags
       const tagsResult = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt: `Generate 5-8 relevant tags for a blog post about "${context.topic}" in the ${context.postType} category. Return as comma-separated values.`,
         temperature: 0.5,
       });
 
       // Generate call to action
       const ctaResult = await generateText({
-        model: openai('gpt-4.1-nano'),
+        model: google('models/gemini-2.0-flash-lite'),
         prompt: `Create a compelling call-to-action for a blog post about "${context.topic}". Make it encourage engagement or purchase. Keep it under 100 characters.`,
         temperature: 0.6,
       });
@@ -95,7 +95,7 @@ export const generateBlogPost = createTool({
       let seoKeywords: string[] | undefined;
       if (context.includeSEO) {
         const seoResult = await generateText({
-          model: openai('gpt-4.1-nano'),
+          model: google('models/gemini-2.0-flash-lite'),
           prompt: `Generate 8-12 SEO keywords for a blog post about "${context.topic}" in the e-commerce space. Return as comma-separated values.`,
           temperature: 0.3,
         });

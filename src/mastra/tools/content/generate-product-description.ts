@@ -1,6 +1,6 @@
 import { createTool } from '@mastra/core';
 import { z } from 'zod';
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
 import { ecommerceStore } from '../../../data/store';
 
@@ -118,7 +118,7 @@ async function generateDescriptions(
     const shortPrompt = `Generate a compelling short product description (1-2 sentences) for:\nProduct: ${name}\nCategory: ${category}\nTarget Audience: ${targetAudience}\nTone: ${tone}\nFeatures: ${features.join(', ')}\n\nFocus on the key benefit and appeal to the target audience.`;
 
     const shortResult = await generateText({
-      model: openai('gpt-4.1-nano'),
+      model: google('models/gemini-2.0-flash-lite'),
       prompt: shortPrompt,
     });
 
@@ -126,7 +126,7 @@ async function generateDescriptions(
     const bulletPrompt = `Generate 4-5 compelling bullet points for this product:\nProduct: ${name}\nCategory: ${category}\nFeatures: ${features.join(', ')}\nTone: ${tone}\n\nFormat as simple bullet points without bullets symbols, one per line.`;
 
     const bulletResult = await generateText({
-      model: openai('gpt-4.1-nano'),
+      model: google('models/gemini-2.0-flash-lite'),
       prompt: bulletPrompt,
     });
 
@@ -140,7 +140,7 @@ async function generateDescriptions(
     const fullPrompt = `Generate a ${lengthMap[length as keyof typeof lengthMap]} product description for:\nProduct: ${name}\nCategory: ${category}\nTarget Audience: ${targetAudience}\nTone: ${tone}\nFeatures: ${features.join(', ')}\n\nMake it engaging, informative, and persuasive. Include key benefits and appeal to the target audience.`;
 
     const fullResult = await generateText({
-      model: openai('gpt-4.1-nano'),
+      model: google('models/gemini-2.0-flash-lite'),
       prompt: fullPrompt,
     });
 

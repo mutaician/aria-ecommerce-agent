@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { Agent } from '@mastra/core/agent';
 import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
@@ -18,7 +18,7 @@ export const weatherAgent = new Agent({
 
       Use the weatherTool to fetch current weather data.
 `,
-  model: openai('gpt-4.1-mini'),
+  model: google('models/gemini-2.0-flash-lite'),
   tools: { weatherTool },
   memory: new Memory({
     storage: new LibSQLStore({
